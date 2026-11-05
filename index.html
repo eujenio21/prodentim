@@ -45,99 +45,597 @@ function gtag_report_conversion(url) {
 </head>
 
 
-  <style>
-:root{--green:#315f43;--green2:#477b58;--sage:#eaf2e9;--cream:#fbfaf5;--ink:#1d2b22;--muted:#58665c;--line:#dce7dc;--white:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-a{color:inherit}.topline{background:var(--green);color:#fff;text-align:center;padding:9px 16px;font-size:.82rem;letter-spacing:.04em}
-header{padding:20px 5%;display:flex;justify-content:center;align-items:center;border-bottom:1px solid var(--line);background:#fff}
-.brand{font-family:Georgia,serif;font-size:2rem;font-weight:700;letter-spacing:-.05em;color:var(--green);text-decoration:none}
-main{max-width:1100px;margin:auto;padding:32px 22px 70px}
-.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:35px;align-items:center;background:linear-gradient(135deg,#f1f6ed,#fff);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,5vw,55px);overflow:hidden}
-.eyebrow{display:inline-block;color:var(--green);background:#dcebdc;border-radius:999px;padding:6px 12px;font-size:.76rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-h1{font:700 clamp(2.3rem,5vw,4.2rem)/1.06 Georgia,serif;letter-spacing:-.04em;margin:18px 0}
-.lead{font-size:1.12rem;color:var(--muted);max-width:580px}
-.product{width:100%;max-width:470px;height:auto;display:block;margin:auto;filter:drop-shadow(0 20px 25px #243c2520)}
-.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#2f7046;color:white;text-decoration:none;padding:16px 24px;border-radius:9px;font-weight:800;margin:18px 0 8px;box-shadow:0 8px 18px #315f4325;transition:transform .18s,background .18s}
-.cta:hover{background:#244f35;transform:translateY(-2px)}.micro{font-size:.82rem;color:var(--muted)}
-.points{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.pill{border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 12px;font-size:.85rem;color:#385742}
-section{padding:55px 0}.sectionhead{text-align:center;max-width:700px;margin:0 auto 28px}h2{font:700 clamp(1.8rem,3.6vw,2.8rem)/1.15 Georgia,serif;letter-spacing:-.025em;margin:0 0 12px}.sectionhead p,.muted{color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:23px}.num{width:38px;height:38px;border-radius:12px;background:var(--sage);display:grid;place-items:center;color:var(--green);font-weight:900;margin-bottom:14px}.card h3{margin:0 0 8px;font-size:1.05rem}.card p{margin:0;color:var(--muted);font-size:.94rem}
-.feature{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;background:#eaf2e9;border-radius:22px;padding:clamp(22px,4vw,42px)}.feature h2{color:var(--green)}.ingredients{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ingredient{background:#fff;border:1px solid #d8e5d8;border-radius:12px;padding:15px}.ingredient strong{display:block;color:var(--green);margin-bottom:3px}.ingredient span{font-size:.9rem;color:var(--muted)}
-.note{font-size:.84rem;color:var(--muted);border-left:3px solid #a9c7a9;padding-left:13px;margin-top:18px}
-.faq{max-width:800px;margin:auto}.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0}.faq summary{cursor:pointer;font-weight:750}.faq p{color:var(--muted);margin-bottom:0}
-.bottom{text-align:center;background:var(--green);color:white;border-radius:22px;padding:clamp(28px,5vw,52px)}.bottom p{color:#e2eee3;max-width:640px;margin:12px auto}.bottom .cta{background:#fff;color:var(--green)}.bottom .cta:hover{background:#eaf2e9}
-footer{text-align:center;padding:25px 16px;color:#68746b;font-size:.8rem}footer a{color:var(--green)}
-@media(max-width:760px){.hero,.feature{grid-template-columns:1fr}.hero-copy{order:1}.hero-visual{order:0}.product{max-width:340px}.cards{grid-template-columns:1fr}.ingredients{grid-template-columns:1fr 1fr}main{padding:22px 14px 45px}.brand{font-size:1.75rem}}
-@media(max-width:420px){.ingredients{grid-template-columns:1fr}.cta{width:100%;text-align:center}}
+<style>
+:root {
+  --green: #278b63;
+  --dark-green: #176c4b;
+  --purple: #6845a0;
+  --light: #f3f8f5;
+  --text: #29382f;
+  --muted: #65736b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.container {
+  width: 90%;
+  max-width: 1080px;
+  margin: auto;
+}
+
+header {
+  padding: 18px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.logo span {
+  color: var(--purple);
+}
+
+.hero {
+  padding: 65px 0;
+  background: linear-gradient(130deg,#eff8f2,#f4f0fa);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero img {
+  height: 390px;
+  border-radius: 18px;
+}
+
+.eyebrow {
+  color: var(--dark-green);
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(34px,5vw,50px);
+  line-height: 1.15;
+  margin: 15px 0;
+}
+
+h2 {
+  font-size: clamp(27px,4vw,36px);
+  line-height: 1.25;
+  color: #263d32;
+}
+
+h3 {
+  color: var(--dark-green);
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+p {
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-block;
+  background: var(--green);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 16px 25px;
+  border-radius: 8px;
+  margin-top: 15px;
+  transition: .2s;
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--dark-green);
+  transform: translateY(-2px);
+}
+
+.section {
+  padding: 65px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.intro {
+  max-width: 760px;
+  margin: 0 auto 35px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.problem {
+  border: 1px solid #e8eee9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px #00000009;
+  background: white;
+}
+
+.problem img {
+  height: 255px;
+}
+
+.problem-content {
+  padding: 24px;
+}
+
+.problem-content h3 {
+  margin-top: 0;
+}
+
+.soft {
+  background: var(--light);
+}
+
+.highlight {
+  background: #f6f1fb;
+  padding: 35px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+
+.product-box {
+  max-width: 780px;
+  margin: auto;
+  padding: 35px;
+  border-radius: 16px;
+  background: #f2f8f4;
+  text-align: center;
+  border: 1px solid #e1eee5;
+}
+
+.product-box ul {
+  display: inline-block;
+  text-align: left;
+  color: var(--muted);
+  line-height: 2;
+}
+
+.disclaimer {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #7b857e;
+}
+
+footer {
+  background: #263b31;
+  padding: 35px 0;
+  text-align: center;
+  color: white;
+}
+
+footer p {
+  color: #d3ded6;
+}
+
+@media(max-width:750px) {
+
+  .hero-grid,
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 40px 0;
+  }
+
+  .hero img {
+    height: 270px;
+  }
+
+  .section {
+    padding: 45px 0;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-box {
+    padding: 23px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="topline">A CLOSER LOOK AT DAILY ORAL WELLNESS</div>
-<header><a class="brand" href="#top" aria-label="ProDentim home">ProDentim</a></header>
-<main id="top">
-  <div class="hero">
-    <div class="hero-copy">
-      <span class="eyebrow">Oral probiotic support</span>
-      <h1>What if oral care started with the balance of your mouth?</h1>
-      <p class="lead">Meet ProDentim, a chewable oral probiotic supplement formulated with probiotic strains and selected nutrients to support teeth and gum health as part of your everyday routine.</p>
-      <a class="cta" href="https://49566-y9n0t8031e4fi-olml51.hop.clickbank.net" target="_blank" rel="noopener noreferrer">Explore ProDentim on the Official Site <span aria-hidden="true">→</span></a>
-      <div class="micro">See the product details, ingredients, available packages and current terms on the seller's website.</div>
-      <div class="points"><span class="pill">3.5 billion probiotics*</span><span class="pill">Chewable format</span><span class="pill">Daily oral-care routine</span></div>
+
+<header>
+  <div class="container">
+    <div class="logo">Oral<span>Health</span> Guide</div>
+  </div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <div class="eyebrow">Your Daily Oral Wellness</div>
+
+      <h1>Your Smile Deserves More Attention Than You Think</h1>
+
+      <p>
+        Your oral health is about more than just brushing.
+        Healthy gums, fresh breath and a balanced oral
+        environment are all important parts of a healthy smile.
+      </p>
+
+      <p>
+        Discover why beneficial bacteria may play an
+        interesting role in your daily oral care routine.
+      </p>
+
+      <!-- BUTTON 1: DIRECT AFFILIATE LINK -->
+
+      <a class="btn"
+         href="https://3d8df4r6k2zg187bxai32irfei.hop.clickbank.net"
+         target="_blank"
+         rel="noopener noreferrer">
+        DISCOVER PRODENTIM
+      </a>
     </div>
-    <div class="hero-visual">
-      <img class="product" src="https://prodentim101.com/statics/img/prodentim-strawberry.png" alt="ProDentim supplement bottles with strawberry imagery" fetchpriority="high">
+
+    <img
+      src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=85"
+      alt="Beautiful healthy smile"
+      fetchpriority="high">
+
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+
+<section class="section">
+  <div class="container center">
+
+    <div class="eyebrow">Common Oral Health Concerns</div>
+
+    <h2>Are These Everyday Oral Health Concerns Familiar to You?</h2>
+
+    <p class="intro">
+      Many people focus only on their teeth when thinking
+      about oral care. However, there are several other
+      aspects worth considering.
+    </p>
+
+    <div class="problem-grid">
+
+      <!-- GUM HEALTH -->
+
+      <article class="problem">
+
+        <img
+          src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=850&q=85"
+          alt="Dental professional examining gum health"
+          loading="lazy">
+
+        <div class="problem-content">
+
+          <h3>1. Taking Care of Your Gums</h3>
+
+          <p>
+            Your gums play an essential role in supporting
+            your teeth. Keeping them healthy is an important
+            part of maintaining your smile.
+          </p>
+
+          <p>
+            Daily hygiene, regular dental visits and
+            appropriate nutritional support can all be
+            part of a thoughtful oral care routine.
+          </p>
+
+        </div>
+      </article>
+
+      <!-- FRESH BREATH -->
+
+      <article class="problem">
+
+        <img
+          src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=850&q=85"
+          alt="Confident person smiling"
+          loading="lazy">
+
+        <div class="problem-content">
+
+          <h3>2. Maintaining Fresh Breath</h3>
+
+          <p>
+            Breath freshness can influence how comfortable
+            you feel during conversations, meetings and
+            everyday social interactions.
+          </p>
+
+          <p>
+            Oral hygiene, hydration and identifying
+            possible causes are important steps toward
+            maintaining fresh breath.
+          </p>
+
+        </div>
+      </article>
+
+      <!-- ORAL MICROBIOME -->
+
+      <article class="problem">
+
+        <img
+          src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=850&q=85"
+          alt="Modern dental clinic and oral health care"
+          loading="lazy">
+
+        <div class="problem-content">
+
+          <h3>3. Understanding Oral Bacteria</h3>
+
+          <p>
+            Your mouth naturally contains a community
+            of microorganisms, including beneficial
+            bacteria.
+          </p>
+
+          <p>
+            Maintaining a balanced oral microbiome is
+            an interesting area of modern oral health
+            research.
+          </p>
+
+        </div>
+      </article>
+
+      <!-- TEETH -->
+
+      <article class="problem">
+
+        <img
+          src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=850&q=85"
+          alt="Professional dental care"
+          loading="lazy">
+
+        <div class="problem-content">
+
+          <h3>4. Maintaining Healthy Teeth</h3>
+
+          <p>
+            Your teeth face daily challenges from food,
+            drinks and everyday habits.
+          </p>
+
+          <p>
+            Consistent brushing, flossing, good nutrition
+            and professional dental care help support
+            long-term dental wellness.
+          </p>
+
+        </div>
+      </article>
+
+    </div>
+
+    <!-- BUTTON 2: DIRECT AFFILIATE LINK -->
+
+    <div style="margin-top:35px;">
+
+      <a class="btn"
+         href="https://3d8df4r6k2zg187bxai32irfei.hop.clickbank.net"
+         target="_blank"
+         rel="noopener noreferrer">
+        EXPLORE THE PRODENTIM FORMULA
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- MICROBIOME -->
+
+<section class="section soft">
+  <div class="container center">
+
+    <div class="eyebrow">A Different Perspective</div>
+
+    <h2>Have You Ever Thought About the Bacteria in Your Mouth?</h2>
+
+    <p class="intro">
+      Your mouth has its own natural microbial ecosystem.
+      Not all bacteria are harmful. Some beneficial bacteria
+      are associated with maintaining a balanced oral environment.
+    </p>
+
+    <div class="highlight">
+
+      <h3 style="color:#6845a0">
+        Discover the Oral Microbiome
+      </h3>
+
+      <p>
+        Researchers continue to explore how oral microorganisms
+        interact with teeth, gums and the overall oral environment.
+      </p>
+
+      <p>
+        This is one reason probiotic ingredients have attracted
+        attention in the world of oral wellness.
+      </p>
+
+    </div>
+
+    <!-- BUTTON 3: DIRECT AFFILIATE LINK -->
+
+    <a class="btn"
+       href="https://3d8df4r6k2zg187bxai32irfei.hop.clickbank.net"
+       target="_blank"
+       rel="noopener noreferrer">
+      LEARN MORE ABOUT PRODENTIM
+    </a>
+
+  </div>
+</section>
+
+<!-- PRODUCT -->
+
+<section class="section" id="discover">
+  <div class="container">
+
+    <div class="center">
+
+      <div class="eyebrow">Introducing ProDentim</div>
+
+      <h2>A Probiotic Approach to Daily Oral Wellness</h2>
+
+      <p class="intro">
+        ProDentim is a chewable dietary supplement
+        formulated with probiotic strains and other
+        ingredients intended to support oral health.
+      </p>
+
+    </div>
+
+    <div class="product-box">
+
+      <h2 style="color:#278b63">
+        What Makes ProDentim Interesting?
+      </h2>
+
+      <p>
+        According to the product presentation, each serving
+        contains 3.5 billion probiotic cultures.
+      </p>
+
+      <ul>
+        <li>Lactobacillus Paracasei</li>
+        <li>B. lactis BL-04</li>
+        <li>Lactobacillus Reuteri</li>
+        <li>Additional ingredients for oral wellness support</li>
+      </ul>
+
+      <p>
+        Its probiotic formula is designed to complement
+        your existing oral hygiene routine.
+      </p>
+
+      <p>
+        Want to learn more about the ingredients,
+        product details and available packages?
+      </p>
+
+      <!-- BUTTON 4: DIRECT AFFILIATE LINK -->
+
+      <a class="btn"
+         href="https://3d8df4r6k2zg187bxai32irfei.hop.clickbank.net"
+         target="_blank"
+         rel="noopener noreferrer">
+        VISIT THE OFFICIAL WEBSITE
+      </a>
+
+      <p class="disclaimer">
+        Please review the official website for complete
+        product information, ingredients and directions.
+      </p>
+
     </div>
   </div>
+</section>
 
-  <section>
-    <div class="sectionhead">
-      <h2>The detail worth knowing</h2>
-      <p>Your mouth has its own ecosystem of microorganisms. ProDentim is designed around the idea of supporting that oral environment—not replacing the basics of dental care.</p>
-    </div>
-    <div class="cards">
-      <article class="card"><div class="num">01</div><h3>A probiotic-focused formula</h3><p>The sales page describes a blend containing 3.5 billion probiotic strains. Check the current product label and serving information for the exact formulation.</p></article>
-      <article class="card"><div class="num">02</div><h3>Selected ingredients</h3><p>The product presentation lists strains such as Lactobacillus paracasei and Lactobacillus reuteri, alongside other nutrients.</p></article>
-      <article class="card"><div class="num">03</div><h3>Designed for a simple routine</h3><p>The seller describes ProDentim as a chewable tablet. Follow the label directions and keep brushing, flossing and regular dental visits in your routine.</p></article>
-    </div>
-  </section>
+<!-- FINAL CTA -->
 
-  <section class="feature">
-    <div>
-      <span class="eyebrow">Inside the formula</span>
-      <h2>Get familiar with the ingredients</h2>
-      <p class="muted">The product's sales presentation highlights probiotic strains and a blend of nutrients. Ingredient presence alone does not guarantee a particular result.</p>
-      <a class="cta" href="https://49566-y9n0t8031e4fi-olml51.hop.clickbank.net" target="_blank" rel="noopener noreferrer">View the full product details →</a>
-    </div>
-    <div class="ingredients">
-      <div class="ingredient"><strong>Lactobacillus paracasei</strong><span>A probiotic strain listed in the product presentation.</span></div>
-      <div class="ingredient"><strong>Lactobacillus reuteri</strong><span>Another probiotic strain named by the seller.</span></div>
-      <div class="ingredient"><strong>B. lactis BL-04®</strong><span>A probiotic strain included in the advertised formula.</span></div>
-      <div class="ingredient"><strong>Inulin &amp; peppermint</strong><span>Additional ingredients described on the product page.</span></div>
-    </div>
-  </section>
+<section class="section soft">
+  <div class="container center">
 
-  <section>
-    <div class="sectionhead"><h2>Before you decide</h2><p>A few useful points to check directly with the seller.</p></div>
-    <div class="faq">
-      <details><summary>Where can I see the current price and packages?</summary><p>Use the button below to open the seller's page. Prices, package options, shipping and promotions may change, so verify the current terms before ordering.</p></details>
-      <details><summary>Does ProDentim replace brushing or dental treatment?</summary><p>No. A supplement should not replace brushing with fluoride toothpaste, flossing, professional dental care or treatment recommended by your dentist.</p></details>
-      <details><summary>What if I take medication or have a health condition?</summary><p>Review the full ingredient list and ask a qualified healthcare professional before using a supplement, especially if you take medication, are pregnant, or have an underlying health condition.</p></details>
-    </div>
-  </section>
+    <div class="eyebrow">Your Oral Wellness Journey</div>
 
-  <section class="bottom">
-    <span class="eyebrow">Learn more</span>
-    <h2>Curious whether ProDentim fits your routine?</h2>
-    <p>Review the official product information, full ingredients, usage directions, current package options and refund terms before making a decision.</p>
-    <a class="cta" href="https://49566-y9n0t8031e4fi-olml51.hop.clickbank.net" target="_blank" rel="noopener noreferrer">Visit the ProDentim Website →</a>
-    <div class="micro" style="color:#e2eee3">Please review all terms on the seller's website before purchasing.</div>
-  </section>
-</main>
+    <h2>Give Your Daily Oral Care Routine a Closer Look</h2>
+
+    <p class="intro">
+      Discover more about ProDentim and explore whether
+      this probiotic supplement is a suitable addition
+      to your personal wellness routine.
+    </p>
+
+    <!-- BUTTON 5: DIRECT AFFILIATE LINK -->
+
+    <a class="btn"
+       href="https://3d8df4r6k2zg187bxai32irfei.hop.clickbank.net"
+       target="_blank"
+       rel="noopener noreferrer">
+      EXPLORE PRODENTIM NOW
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
 <footer>
-  <p><strong>Informational notice:</strong> This page is an independent product introduction and is not medical advice. Dietary supplements are not intended to diagnose, treat, cure or prevent disease. Individual experiences vary. The product and its claims have not been independently verified by this page.</p>
-  <p>Product name and imagery are used to identify the product. <a href="https://49566-y9n0t8031e4fi-olml51.hop.clickbank.net" target="_blank" rel="noopener noreferrer">Check the seller's website for current information.</a></p>
+  <div class="container">
+
+    <div class="logo" style="color:white">
+      Oral<span>Health</span> Guide
+    </div>
+
+    <p>Independent Oral Wellness Information</p>
+
+    <p class="disclaimer">
+      Disclaimer: This website is for educational and
+      informational purposes only. ProDentim is a dietary
+      supplement, not a medicine. It is not intended to
+      diagnose, treat, cure or prevent any disease.
+      Individual experiences may vary. Dietary supplements
+      do not replace professional dental care.
+    </p>
+
+    <p class="disclaimer">
+      Affiliate Disclosure: This website contains affiliate
+      links. We may earn a commission if you purchase
+      through these links, at no additional cost to you.
+    </p>
+
+    <p class="disclaimer">
+      © 2026 Oral Health Guide. All rights reserved.
+    </p>
+
+  </div>
 </footer>
+
 </body>
 </html>
-
-
